@@ -1,5 +1,7 @@
 import Model.Bug;
 import Model.User;
+import Model.computer.Laptop;
+import Model.computer.PC;
 import utils.StringUtils;
 import utils.WeekUtils;
 
@@ -362,12 +364,25 @@ public class MainApp {
         // String radekTest = StringUtils.getFormattedText("RadekTestowy");
         // System.out.println(radekTest);
 
-        System.out.println(WeekUtils.MONDAY);
+        // System.out.println(WeekUtils.MONDAY);
 
         // PRZYPADKOWE NADPISANIE WARTOŚCI
         // WeekUtils.Monday = "Sunday";
 
         // System.out.println(WeekUtils.MONDAY);
+
+// DWA RODZAJE RELACJI MIĘDZY KLASAMI:
+// 1. IS A - jest czymś - DZIEDZICZENIE
+// 2. HAS A - posiada coś - KOMPOZYCJA
+
+        PC officeComputer = new PC("Office computer", "HP", 500, 16);
+        Laptop gamingLaptop = new Laptop("XGames","HP Games",500,128);
+
+        officeComputer.switchOn();
+        System.out.println(officeComputer.getState());
+
+        gamingLaptop.switchOn();
+        System.out.println(gamingLaptop.getState());
 
     }
 
