@@ -375,14 +375,29 @@ public class MainApp {
 // 1. IS A - jest czymś - DZIEDZICZENIE
 // 2. HAS A - posiada coś - KOMPOZYCJA
 
-        PC officeComputer = new PC("Office computer", "HP", 500, 16);
-        Laptop gamingLaptop = new Laptop("XGames","HP Games",500,128);
+        PC officeComputer = new PC("Office computer", "HP", 500, 16, true);
+        Laptop gamingLaptop = new Laptop("XGames","HP Games",500,128,50);
 
-        officeComputer.switchOn();
-        System.out.println(officeComputer.getState());
+        // officeComputer.switchOn();
+        // System.out.println(officeComputer.getState());
 
-        gamingLaptop.switchOn();
-        System.out.println(gamingLaptop.getState());
+        // gamingLaptop.switchOn();
+        // System.out.println(gamingLaptop.getState());
+
+        // KOMPILATOR W PIERSZEJ KOLEJNOŚCI SPRAWDZA CZY W KLASIE CHILDREN JEST NADPISANA METODA, JEŚLI NIE MA TO WYWOŁA METODE Z PARENTA
+
+        // gamingLaptop.setBatteryLevel(100);
+
+        // officeComputer.switchOn();
+        // gamingLaptop.switchOn();
+
+        // System.out.println(gamingLaptop.getState());
+
+        officeComputer.switchOn(); 
+
+        officeComputer.setIsPluggedIn(false);
+
+        officeComputer.switchOn(); 
 
     }
 

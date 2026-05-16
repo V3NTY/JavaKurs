@@ -3,11 +3,17 @@ package Model.computer;
 // KLASA MATKA DLA LAPTOP I PC
 
 public class Computer {
-private String name;
-private String type;
-private int hdd;
-private int ram;
-private boolean state;
+
+// PROTECTED -> KAŻDY CHILDREN MA DOSTĘP DO TEGO POLA
+// PRIVATE -> DOSTĘP JEST TYLKO Z WEWNĄTRZ KLASY
+
+// W KLASIE MATCE DOBRĄ PRAKTYKĄ JEST USTAWIANIE PROTECTED
+
+protected String name;
+protected String type;
+protected int hdd;
+protected int ram;
+protected boolean state;
 
 public Computer(String name, String type, int hdd, int ram){
 this.name = name;
@@ -51,6 +57,7 @@ public void setRam(int ram) {
 }
 
 public void switchOn(){
+    System.out.println("Super - ustawiam pole state na true");
     state = true;
 }
 
