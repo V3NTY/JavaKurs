@@ -1,5 +1,6 @@
 import Model.Bug;
 import Model.User;
+import Model.computer.Computer;
 import Model.computer.Laptop;
 import Model.computer.PC;
 import utils.StringUtils;
@@ -375,9 +376,33 @@ public class MainApp {
 // 1. IS A - jest czymś - DZIEDZICZENIE
 // 2. HAS A - posiada coś - KOMPOZYCJA
 
-        PC officeComputer = new PC("Office computer", "HP", 500, 16, true);
-        Laptop gamingLaptop = new Laptop("XGames","HP Games",500,128,50);
+        // POLIMORFIZM - WIELE FORM
+        // DO JEDNEGO TYPU REFERENCJI MOŻNA PRZYPISAĆ WIELE FORM
+        // ZMIENNA JEST TYPU MATKI A REFERENCJA TYPU DZIECKA
 
+        Computer officeComputer1 = new PC("Office computer 1", "HP", 500, 16, true);
+        // Computer officeComputer2 = new PC("Office computer 2", "HP", 500, 16, true);
+        // Computer officeComputer3 = new PC("Office computer 3", "HP", 500, 16, true);
+        Computer gamingLaptop = new Laptop("XGames","HP Games",500,128,50);
+        // Computer macbook = new Laptop("MacWork","HP Games",500,128,50);
+
+        // Computer[] computers = {officeComputer1,officeComputer2,officeComputer3,gamingLaptop,macbook};
+
+        // for (Computer computer : computers){
+        //         computer.switchOff();
+        // // PRZY NADPISANYCH METODACH WYWOŁYWANA JEST METODA Z KLASY DZIECKA
+        // }
+
+        // JEŚLI METODE POSIADA TYLKO DZIECKO, Z POZIOMU RODZICA NIE MOZNA JEJ WYWOŁAĆ, GDYŻ NIE DZIEDZICZY JEJ W GÓRĘ, NP
+        // officeComputer1.showComputerName();
+        // ZAMIAST TEGO STOSUJEMY RZUTOWANIE TYPU DZIECKA:
+
+        // ((PC)officeComputer1).showComputerName();
+
+        // ((Laptop)gamingLaptop).setBatteryLevel(50);
+        
+
+        // System.out.println(macbook);
         // officeComputer.switchOn();
         // System.out.println(officeComputer.getState());
 
@@ -393,11 +418,27 @@ public class MainApp {
 
         // System.out.println(gamingLaptop.getState());
 
-        officeComputer.switchOn(); 
+        // officeComputer.switchOn(); 
 
-        officeComputer.setIsPluggedIn(false);
+        // officeComputer.setIsPluggedIn(false);
 
-        officeComputer.switchOn(); 
+        // officeComputer.switchOn(); 
+
+
+        //ABSTRAKCJA vs KONKRETNE ROZWIĄZANIA
+
+        // Computer computer = new Computer("AAA", "bbb", 512, 32);
+
+        // officeComputer1.volumeUp();
+        gamingLaptop.volumeUp(50);
+        gamingLaptop.volumeDown(-1);
+
+
+        // System.out.println(officeComputer1.volumeDown());
+        // System.out.println(gamingLaptop.volumeDown(0));
+        //     System.out.println(gamingLaptop.volumeDown(-1));
+
+
 
     }
 

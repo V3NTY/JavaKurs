@@ -2,7 +2,13 @@ package Model.computer;
 
 // KLASA MATKA DLA LAPTOP I PC
 
-public class Computer {
+
+// KLASA ABSTRACT POZWALA DZIEDZICZYĆ DZIECIOM ALE NIE POZWALA TWORZYĆ INSTANCJI BEZPOŚREDNIO Z NIEJ ALE MOŻNA JEJ UŻYWAĆ JAKO REFERENCJI
+
+// JEŻELI KLASA POSIADA CHOĆ JEDNĄ METODĘ ABSTRAKCYJNĄ, TO SAMA MUSI BYĆ ABSTRAKCYJNA
+
+// WSZYSTKIE DZIEDZICZĄCE KLASY MUSZĄ NADPISAĆ KAŻDĄ METODĘ ABSTRAKCYJNĄ Z KLASY MATKI
+abstract public class Computer {
 
 // PROTECTED -> KAŻDY CHILDREN MA DOSTĘP DO TEGO POLA
 // PRIVATE -> DOSTĘP JEST TYLKO Z WEWNĄTRZ KLASY
@@ -14,6 +20,7 @@ protected String type;
 protected int hdd;
 protected int ram;
 protected boolean state;
+protected int volumeLevel;
 
 public Computer(String name, String type, int hdd, int ram){
 this.name = name;
@@ -21,6 +28,7 @@ this.type = type;
 this.hdd = hdd;
 this.ram = ram;
 this.state = false;
+volumeLevel = 0;
 
 }
 
@@ -62,6 +70,7 @@ public void switchOn(){
 }
 
 public void switchOff(){
+    System.out.println("Wyłączam komputer: " + name);
     state = false;
 }
 
@@ -69,6 +78,11 @@ public boolean getState(){
     return state;
 }
 
+// METODA ABSTRAKCYJNA -> WYMUSZA NADPISANIE CIAŁA METODY WE WSZYSTKICH DZIEDZICZĄCYCH CHILDRENACH
+
+public abstract int volumeUp(int newValue);
+
+public abstract int volumeDown(int newValue);
 
 }
 

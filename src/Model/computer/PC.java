@@ -36,9 +36,39 @@ public class PC extends Computer {
         }
 
            // ODWOŁANIE DO SUPER ODWOŁUJE DO KLASY MATKI
-    
+    }
+        public void switchOff(){
+        System.out.println("Wyłączam PC: " + name);
+        state = false;
     }
 
-    
+    @Override
+    public int volumeUp(int newValue){
+    if (newValue >= volumeLevel && newValue<=100 && newValue != volumeLevel)
+    {
+    volumeLevel = newValue;
+    System.out.println("Volume up: New volume level is " + volumeLevel);
+    return volumeLevel;    
+    }
+    else{
+    System.out.println("Invalid input value");
+    return volumeLevel;
+    }
+
+}
+
+    @Override
+    public int volumeDown(int newValue) {
+    if (newValue <= volumeLevel && newValue >=0 && newValue != volumeLevel){
+        volumeLevel = newValue;
+        System.out.println("Volume down: New volume level is " + volumeLevel);
+        return volumeLevel;    
+    }
+    else{
+    System.out.println("Invalid input value");
+    return volumeLevel;
+    }
+
+    }
 
 }
