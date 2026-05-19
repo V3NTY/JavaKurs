@@ -380,10 +380,10 @@ public class MainApp {
         // DO JEDNEGO TYPU REFERENCJI MOŻNA PRZYPISAĆ WIELE FORM
         // ZMIENNA JEST TYPU MATKI A REFERENCJA TYPU DZIECKA
 
-        Computer officeComputer1 = new PC("Office computer 1", "HP", 500, 16, true);
-        // Computer officeComputer2 = new PC("Office computer 2", "HP", 500, 16, true);
-        // Computer officeComputer3 = new PC("Office computer 3", "HP", 500, 16, true);
-        Computer gamingLaptop = new Laptop("XGames","HP Games",500,128,50);
+        // Computer officeComputer1 = new PC("Office computer 1", "HP", 500, 16, true);
+        // // Computer officeComputer2 = new PC("Office computer 2", "HP", 500, 16, true);
+        // // Computer officeComputer3 = new PC("Office computer 3", "HP", 500, 16, true);
+        // Computer gamingLaptop = new Laptop("XGames","HP Games",500,128,50);
         // Computer macbook = new Laptop("MacWork","HP Games",500,128,50);
 
         // Computer[] computers = {officeComputer1,officeComputer2,officeComputer3,gamingLaptop,macbook};
@@ -430,15 +430,29 @@ public class MainApp {
         // Computer computer = new Computer("AAA", "bbb", 512, 32);
 
         // officeComputer1.volumeUp();
-        gamingLaptop.volumeUp(50);
-        gamingLaptop.volumeDown(-1);
+        // gamingLaptop.volumeUp(50);
+        // gamingLaptop.volumeDown(-1);
 
 
         // System.out.println(officeComputer1.volumeDown());
         // System.out.println(gamingLaptop.volumeDown(0));
         //     System.out.println(gamingLaptop.volumeDown(-1));
 
+        // INTERFACE
 
+        Laptop laptop = new Laptop("HP", "HP", 512, 16,60);
+
+        laptop.playMusic();
+        laptop.stopMusic();
+        laptop.pauseMusic();
+
+        laptop.sayHello();
+
+        // JAVA OBSŁUGUJE WIELODZIEDZICZENIE PO INTERFEJSACH
+
+        laptop.playVideo();
+        laptop.stopVideo();
+        laptop.pauseVideo();
 
     }
 

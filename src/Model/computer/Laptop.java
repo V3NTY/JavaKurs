@@ -5,7 +5,7 @@ package Model.computer;
 
 // MATKA JEST TYLKO JEDNA
 
-public class Laptop extends Computer {
+public class Laptop extends Computer implements Music, Video {
 
     private int batteryLevel;
 
@@ -64,8 +64,43 @@ public class Laptop extends Computer {
     }
 
     }
-    
 
+    @Override
+    public void playMusic() {
+        System.out.println("PLAY MUSIC");
+    }
+
+    @Override
+    public void pauseMusic() {
+     System.out.println("PAUSE MUSIC");
+    }
+
+    @Override
+    public void stopMusic() {
+    System.out.println("STOP MUSIC");
+    }
+
+    @Override
+    public void playVideo() {
+        System.out.println("PLAY VIDEO");
+    }
+
+    @Override
+    public void pauseVideo() {
+        System.out.println("PAUSE VIDEO");
+    }
+
+    @Override
+    public void stopVideo() {
+        System.out.println("STOP VIDEO");
+    }
+    
+    // METODA SAY HELLO DZIEDZICZONA JEST ZARÓWNO Z MUSIC JAK I Z WIDEO, TRZEBA WIĘC JĄ NAPISAĆ I DAĆ ZNAĆ KOMPILATOROWI Z KTÓREGO INTERFEJSU METODA MA BYĆ IMPLEMENTOWANA, BĄDŹ RĘCZNIE OKREŚLIĆ JEJ DZIAŁANIE
+
+    @Override
+    public void sayHello(){
+        Music.super.sayHello();
+    }
 
 
 }
