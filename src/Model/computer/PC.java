@@ -4,7 +4,7 @@ public class PC extends Computer {
 
     private boolean isPluggedIn;
 
-    public PC(String name, String type, int hdd, int ram, boolean isPluggedIn ) {
+    public PC(String name, String type, Hdd hdd, Ram ram, boolean isPluggedIn ) {
     
         // WYWOŁANIE KONSTRUKTORA Z KLASY MATKI ABY ZACIĄGNĄĆ POLA
         super(name, type, hdd, ram);

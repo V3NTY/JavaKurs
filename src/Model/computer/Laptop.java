@@ -9,7 +9,7 @@ public class Laptop extends Computer implements Music, Video {
 
     private int batteryLevel;
 
-    public Laptop(String name, String type, int hdd, int ram, int batteryLevel) {
+    public Laptop(String name, String type, Hdd hdd, Ram ram, int batteryLevel) {
         
                // WYWOŁANIE KONSTRUKTORA Z KLASY MATKI ABY ZACIĄGNĄĆ POLA
         super(name, type, hdd, ram);
