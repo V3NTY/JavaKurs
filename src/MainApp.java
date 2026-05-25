@@ -7,9 +7,12 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import Model.Bug;
 import Model.BugReporter;
@@ -711,38 +714,247 @@ public class MainApp {
         //         System.out.println(entry.getKey() + " " + entry.getValue());
         // }
         
-        BugReporter bugReporter = new BugReporter("Tom","Hanks", "example@xyz.com");
+//         BugReporter bugReporter = new BugReporter("Tom","Hanks", "example@xyz.com");
 
-        // 1. CREATE LIST
-        List<Bug> bugList = new ArrayList<>();
+//         // 1. CREATE LIST
+//         List<Bug> bugList = new ArrayList<>();
 
-        bugList.add(new Bug("HIJ", 2, false, bugReporter));
-        bugList.add(new Bug("ABC", 4, true, bugReporter));
-        bugList.add(new Bug("EFG", 1, false, bugReporter));
-        bugList.add(new Bug("CDE", 5, true, bugReporter));
-        bugList.add(new Bug("KLM", 3, true, bugReporter));
-        bugList.add(new Bug("KLM", 3, true, bugReporter));
+//         bugList.add(new Bug("HIJ", 2, false, bugReporter));
+//         bugList.add(new Bug("ABC", 4, true, bugReporter));
+//         bugList.add(new Bug("EFG", 1, false, bugReporter));
+//         bugList.add(new Bug("CDE", 5, true, bugReporter));
+//         bugList.add(new Bug("KLM", 3, true, bugReporter));
+//         bugList.add(new Bug("KLM", 3, true, bugReporter));
 
-       for (Bug bug:bugList){
-        System.out.println(bug.getDescription());
-       }
+//        for (Bug bug:bugList){
+//         System.out.println(bug.getDescription());
+//        }
 
-        //2. GET UNIQUIE VALUES FROM LIST 
-        Set<Bug> uniqueBugList = new HashSet<>(bugList);
+//         //2. GET UNIQUIE VALUES FROM LIST 
+//         Set<Bug> uniqueBugList = new HashSet<>(bugList);
 
-        System.out.println(uniqueBugList.size());
+//         System.out.println(uniqueBugList.size());
 
-        //3. SORT BY BUG DESCRIPTION
+//         //3. SORT BY BUG DESCRIPTION
 
-        Set<Bug> sortedBugList = new TreeSet<>(uniqueBugList);
+//         Set<Bug> sortedBugList = new TreeSet<>(uniqueBugList);
 
-        for (Bug bug:sortedBugList){
-                System.out.println(bug.getDescription());
-        }
+//         for (Bug bug:sortedBugList){
+//                 System.out.println(bug.getDescription());
+//         }
+
+        //// STREAMY////
+        /// STEAM - STRUMIEŃ WARTOŚCI, UŻYWANE ZAWSZE W POŁĄCZENIU Z JAKĄŚ KOLEKCJĄ
+        
+        // ["Bartek", "Antek", "Tomek", "Filip", "Romek", "Franek", "Artur", "Feliks"] -> Stream
+        // wyszukaj imiona zaczynające się od F -> stream ["Filip", "Franek", "Feliks"]
+        // wyszukaj imiona zawierające literę k -> stream ["Franek", "Feliks"]
+        // wyszukaj imiona kończące się na s -> stream ["Feliks"]
+        // wyswietl wszystkie elementy
+
+        // 2 typy streamów:
+        // 1. Pośrednie - wykonują operacje i zwracają nowy stream, tak jak np. w JS filter
+
+        //filter - filtrowanie elementów
+        //map - przekształcanie elementów
+
+
+
+        // 2. Terminalne - wykonywane jako ostatnie - zwracają wartość, pozwalają zebrać wartości do kolekcji.
+
+        // KAŻDY STREAM MUSI KOŃCZYĆ SIĘ METODĄ TERMINALNĄ
+
+        // forEach - wyświetlanie elementów
+        // min/max/sum
+        // anyMatch/allMatch/nonMatch
+        // count
+        // collect - zbieranie elementów
+
+        List<String> names = new ArrayList<>();
+        names.add("Bartek");
+        names.add("Antek");
+        names.add("Filip");
+        names.add("Tom");
+        names.add("Franek");
+        names.add("Feliks");
+        names.add("Romek");
+        names.add("Max");
+
+//         names.stream().filter(str -> str.startsWith("F")).filter(str->str.contains("k")).filter(str->str.endsWith("s")).forEach(str->System.out.println(str));
+
+//         // WYRAŻENIA LAMBDA - TO SAMO CO ARROW FUNCTION W JS
+
+//         names.stream().map(name->name.toUpperCase()).forEach(name->System.out.println(name));
+
+//         names.stream().filter(str->str.length()<=3).map(str->"Short name " + str).forEach(name->System.out.println(name));
+
+//        long count = names.stream().filter(str->str.length()<=3).count();
+//         System.out.println(count);
+
+//   // METODY SPRAWDZAJĄCE ANYMATCH, NONMATCH -> zwracają boolean
+
+//         // ANYMATCH -> SPRAWDZA DO PIERWSZEGO WYSTĄPIENIA
+
+//         boolean anyMatch = names.stream().anyMatch(el->el.contains("a"));
+//         System.out.println(anyMatch);
+
+//         //ALLMATCH - CZY WSZYSTKIE PASUJĄ/ ZAWIERAJĄ
+
+//         boolean allMatch = names.stream().allMatch(el->el.length()>2);
+
+//         System.out.println(allMatch);
+
+//         //NONMATCH - CZY ŻADEN NIE PASUJE/ NIE ZAWIERA
+
+//         boolean nonMatch = names.stream().noneMatch(el->el.endsWith("ski"));
+
+//         System.out.println(nonMatch);
+
+
+        // COLLECT -> ZWRACA ELEMENTY WEDŁUG METODY Z KLASY COLLECTOR NP. TOLIST, TOMAP ETC.
+
+//        List<String> fNames = names.stream().filter(el->el.startsWith("F")).collect(Collectors.toList());
+
+//        System.out.println(fNames);
+
+        //// SORTOWANIE ZA POMOCĄ STREAMÓW
+
+//         List <User> users = new ArrayList<>();
+//         users.add(new User("bartek@test.com", "Bartek", "Biały", 10));
+//         users.add(new User("tomek@test.com", "Tomek", "Czarny", 12));
+//         users.add(new User("marcin@test.com", "Marcin", "Niebieski", 13));
+//         users.add(new User("jacek@test.com", "Jacek", "Fioletowy", 14));
+//         users.add(new User("asia@test.com", "Asia", "Zielona", 16));
+//         // users.add(new User("asia@test.com", "Asia", "Zielony", 16));
+//         users.add(new User("marta@test.com", "Marta", "Czerwona", 17));
+//         users.add(new User("kasia@test.com", "Kasia", "Pomarańczowa", 90));
+//         users.add(new User("kasia@test.com", "Kasia", "Pomarańczowa", 90));
+//         users.add(new User("kasia@test.com", "Kasia", "Pomarańczowa", 90));
+//         users.add(new User("kasia@test.com", "Kasia", "Pomarańczowa", 90));
+
+// //        List <User> sortedUsers = users.stream().sorted(Comparator.comparing(el->el.getFirstName())).collect(Collectors.toList());
+
+//         // REFERENCJA DO METODY - SKRÓCONY ZAPIS ARROW FUNCTION, WYWOŁUJE METODĘ Z DANEJ KLASY
+
+//         // SORTOWANIE PO KILKU PARAMETRACH W KOLEJNOŚCI ZA POMOCĄ METODY COMPARING i THENCOMPARING
+
+//         List <User> sortedUsersWithReference = users.stream().sorted(Comparator.comparing(User::getFirstName).thenComparing(User::getLastName).thenComparing(User::getAge)).collect(Collectors.toList());
+
+//         for (User user:sortedUsersWithReference){
+//                 System.out.println(user.getFirstName()+" "+user.getLastName()+" "+user.getAge());
+//         }
+
+//         // TYP OPTIONAL - OPAKOWANIE DLA OBIEKTU
+//         // ZABEZPIECZENIE PRZED NULLAMI/ NULL POINTERAMI
+
+//         Optional<User> maxAge = users.stream().max(Comparator.comparingInt(User::getUserAge));
+
+        // METODY NA KLASIE OPTIONAL:
+        // get() - wyciąga wartość z wrappera
+
+        // NA TYPIE OPTIONAL NIGDY BEZPOŚREDNIO NIE WYWOŁYWAĆ METODY GET, KTÓRA WYCIĄGA ELEMENT Z PUDEŁKA, BO JEŚLI TAM NIE BĘDZIE ŻADNEGO ITEMU, TO POLECI EXCEPTION. NAJLEPIEJ NAJPIERW UŻYĆ ZROBIĆ IF'A Z ISPRESENT() A NASTĘPNIE GET
+
+        // isPresent() - "pyta" czy wrapper zawiera jakąś wartość
+        // isEmpty()
+
+        // if(maxAge.isPresent()){
+        // maxAge.get();
+        // } else{
+        // System.out.println("Nie znaleziono elementu");
+        // }
+        // System.out.println(maxAge.get());
+
+        ///// orElse() - pozwala na ustawienie wartości defaultowej zwracanej w przypadku, gdy stream nic nie zwraca
+
+//         Integer age = users.stream().map(User::getAge).max(Integer::compareTo).orElse(-1);
+
+//         System.out.println(age);
+//         // ZWRACA NAJWYŻSZY WIEK Z LISTY LUB -1, GDY LISTA JEST PUSTA
+
+
+//        String kasia = users.stream().map(User::getFirstName).filter(name->name.equals("Kasia")).findFirst().orElse("Kasia nie istnieje na liście");
+//         System.out.println(kasia);
+
+        // INTERFEJS FUNKCYJNY - FUNCTIONAL INTERFACE
+        //TYPY INTERFEJSÓW FUNKCYJNYCH:
+
+        // PREDICATE - POBIERA JEDNĄ WARTOŚC I ZWRACA BOOLEAN, NP. FILTER
+        // CONSUMER - POBIERA JEDNĄ WARTOŚĆ I NIC NIE ZWRACA, NP. SOUT
+        // SUPPLIER - DOSTARCZA WARTOŚC, NP. FINDFIRST
+
+        // orElseGet() - przyjmuje wartość i zwraca inną wartość, np. gdy lista nie zawiera wyszukiwanego obiektu
+
+        
+        // User bartek = users.stream().filter(user->user.getFirstName().startsWith("B")).findFirst().orElseGet(()->new User("BartekGet","TestowyGet","b@test.com",10));
+
+        // System.out.println(bartek);
+
+        // orElseThrow - wyrzuca error/wyjątek
+        // User bartek = users.stream().filter(user->user.getFirstName().startsWith("B")).findFirst().orElseThrow(()->new IllegalStateException("User starts with B not found"));
+
+        // System.out.println(bartek);
+
+        // ifPresent() - wykonuje akcje tylko gdy dostarczono wartość
+
+        // users.stream().filter(user->user.getFirstName().startsWith("B")).findFirst().ifPresent(user->System.out.println(user));
+        // ifPresentOrElse() - określa zachowanie zarównjo w przypadku dostarczenia jak i nie dostarczenia wartości
+//  users.stream().filter(user->user.getFirstName().startsWith("B")).findFirst().ifPresentOrElse(user->System.out.println(user), ()->System.out.println("Nie ma takiego użytkownika"));
+
+        List<Computer> computers = new ArrayList<>();
+
+        computers.add(new Laptop("MB PRO 1", "PRO 1", new Hdd("HP",500),new Ram("HP",128),100));
+        computers.add(new Laptop("MB PRO 2", "PRO 2", new Hdd("HP",500),new Ram("HP",128),100));
+        computers.add(new Laptop("MB PRO 3", "PRO 3", new Hdd("HP",256),new Ram("HP",128),100));
+        computers.add(new Laptop("MB PRO 4", "PRO 4", new Hdd("HP",500),new Ram("HP",128),100));
+        computers.add(new PC("PC 1", "BBB", new Hdd("HP",500),new Ram("HP",128),true));
+        computers.add(new PC("PC 2", "AAA", new Hdd("HP",256),new Ram("HP",256),true));
+        computers.add(new PC("PC 3", "PRO 3", new Hdd("HP",500),new Ram("HP",128),true));
+
+        // System.out.println(computers.stream());
+
+        // 1. ZLICZYĆ KOMPUTERY KTÓRE MAJĄ WIĘCEJ NIŻ 128GB RAMU
+
+        // long count = computers.stream().filter(computer -> computer.getRam().getSize() > 128).count();
+        // System.out.println(count);
+
+        // 2. WYŚWIETLIĆ NA KONSOLĘ WSZYSTKIE TYPY KOMPUTERÓW -> MAP
+
+        // computers.stream().map(Computer::getType).forEach(type->System.out.println(type));
+
+        // 3. WYŚWIETLIĆ KOMPUTER, KTÓRY MA NAJWIĘCEJ RAMU, WYŚWIETL NA KONSOLE JEGO NAZWĘ I ROZMIAR
+
+        // Computer computer = computers.stream().max(Comparator.comparingInt(comp -> comp.getRam().getSize())).orElseThrow(()->new IllegalStateException("Nie znaleziono zadnego komputera"));
+
+        // System.out.println(computer.getName());
+
+        // 4. UTWORZYĆ NOWĄ KOLEKCJE Z KOMPUTERAMI, KTÓRE MAJĄ DYSK MNIEJSZY NIŻ 500 GB
+
+        // List<Computer> smallerHddComputers = computers.stream().filter(computer -> computer.getHdd().getSize() < 500).collect(Collectors.toList());
+
+        // smallerHddComputers.forEach(computer -> System.out.println(computer.getName()));
+
+        // 5. POSORTOWAĆ KOMPUTERY PO NAZWIE I TYPIE
+
+        //         List <Computer> sortedComputers = computers.stream().sorted(Comparator.comparing(Computer::getName).thenComparing(Computer::getType)).collect(Collectors.toList());
+
+        // for (Computer computer: sortedComputers){
+        //         System.out.println(computer.getName() + " " + computer.getType());
+        // }
+        // 6. PRZEĆWICZYĆ OPTIONAL
+        // get()
+        // ifPresent()
+        // isEmpty()
+        // orElse()
+        // orElseGet()
+        // orElseThrow()
+        // ifPresent()
+        // ifPresentOrElse()
 
     }
 
   
+
+
 
 
 
